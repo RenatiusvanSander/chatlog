@@ -2,9 +2,7 @@ package org.remad.chatlog.log;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 
 /**
  * Logs the chat messages into a define chatlog file.
