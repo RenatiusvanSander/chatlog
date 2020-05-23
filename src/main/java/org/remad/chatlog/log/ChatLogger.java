@@ -6,8 +6,7 @@ import java.nio.file.Paths;
 
 /**
  * Logs the chat messages into a define chatlog file.
- * ToDo refactor with builder pattern for chaining
- *
+ * ToDo refactor with builder pattern for chaining.
  * @author Remy Meier
  */
 public class ChatLogger implements AutoCloseable {
@@ -20,7 +19,6 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * Factory method so that a new ChatLogger instance is created.
-     *
      * @param path     The full qualified path name without file.
      * @param filename The full qualified filename, means with extension of file e.g txt.
      * @return The created ChatLogger
@@ -39,7 +37,6 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * Closes the file stream.
-     *
      * @throws Exception In case the stream to file is not correct closed.
      */
     @Override
@@ -63,7 +60,6 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * Sets the full qualified log path.
-     *
      * @param chatLogPath The full qualified log path.
      */
     public void setChatLogPath(String chatLogPath) {
@@ -79,7 +75,6 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * Sets log filename
-     *
      * @param chatLogFilename The full qualified filename, contains name and extension. For example filename.txt.
      */
     public void setChatLogFilename(String chatLogFilename) {
@@ -88,7 +83,6 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * Writes message into chat log file.
-     *
      * @param message The message to write.
      * @return In case there is no write error {@code true}. In case there exist a write error {@code false}.
      * @throws IllegalAccessException {@link IllegalAccessException} - In case an error happens on writing to chat log.
@@ -104,7 +98,6 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * Writes message thread safe into chat log file.
-     *
      * @param message The message to write.
      * @throws IllegalAccessException {@link IllegalAccessException} - In case an error happens on writing to chat log.
      */
@@ -117,9 +110,9 @@ public class ChatLogger implements AutoCloseable {
     }
 
     /**
-     * @return In case there is no write error {@code true}. In case there exist a write error {@code false}.
+     * @return In case there is no write error {@code false}. In case there exist a write error {@code true}.
      * @throws IllegalAccessException IllegalAccessException {@link IllegalAccessException} - In case an error happens
-     *                                on writing to chat log.
+     * on writing to chat log.
      */
     public boolean checkError() throws IllegalAccessException {
         if (fileOutputStream == null || logWriter == null) {
@@ -131,7 +124,7 @@ public class ChatLogger implements AutoCloseable {
 
     /**
      * @throws Exception {@link FileNotFoundException} - If the file is not found or created.
-     *                   In case when logWriter creation ends in IOException.
+     * In case when logWriter creation ends in IOException.
      */
     private void initLogger() throws Exception {
         createDirectory();
