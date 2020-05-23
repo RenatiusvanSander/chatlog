@@ -9,27 +9,26 @@ import org.remad.chatlog.log.ChatLogger;
  */
 public class MainThreadsLog {
 
-    public static int MAX = 1000000;
+    public static int MAX = 10000;
 
     public static void main(String[] args) throws InterruptedException {
         ChatLogger chatLogger = ChatLogger.createChatLogger("logs", "chats.log");
+        Worker[] workers = new Worker[150];
 
-        Worker worker1 = new Worker("worker1", chatLogger);
-        Worker worker2 = new Worker("worker2", chatLogger);
-        Worker worker3 = new Worker("worker3", chatLogger);
-        Worker worker4 = new Worker("worker4", chatLogger);
+        for (int i = 0; i < workers.length; i++) {
+            workers[i] = new Worker("worker" + (i + 1), chatLogger);
+            workers[i].start();
+        }
 
-        worker1.start();
-        worker2.start();
-        worker3.start();
-        worker4.start();
+        for (int i = 1; i < MAX; i++) {
+            for(Worker worker : workers) {
+                worker.sleep(0,1);
+            }
+            System.out.println("150 workers slept " + i + " times.");
+        }
 
-        for(int i = 0; i < MAX; i++) {
-            System.out.println("Threads slept " + i + " times.");
-            worker1.sleep(0, 2);
-            worker2.sleep(0,2);
-            worker3.sleep(0,2);
-            worker4.sleep(0,2);
+        for(Worker worker : workers) {
+            worker.terminate();
         }
     }
 }

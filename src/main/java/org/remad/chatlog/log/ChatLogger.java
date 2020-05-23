@@ -1,6 +1,10 @@
 package org.remad.chatlog.log;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
 
 /**
  * Logs the chat messages into a define chatlog file.
@@ -132,6 +136,7 @@ public class ChatLogger implements AutoCloseable {
      *                   In case when logWriter creation ends in IOException.
      */
     private void initLogger() throws Exception {
+        createDirectory();
         if (fileOutputStream == null && logWriter == null && !getChatLogFilename().isEmpty() && !getChatLogPath().isEmpty()) {
             // Create file and logWriter when fileOutputStream is null, chatLogFilename and chatLogPath are not null.
             createFileStream();
@@ -141,6 +146,13 @@ public class ChatLogger implements AutoCloseable {
             close();
             createFileStream();
             logWriter = new PrintWriter(fileOutputStream, true);
+        }
+    }
+
+    private void createDirectory() {
+        if(Files.notExists(Paths.get(getChatLogPath())) ) {
+            File path = new File(getChatLogPath());
+            path.mkdirs();
         }
     }
 

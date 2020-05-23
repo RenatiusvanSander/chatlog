@@ -9,7 +9,7 @@ import java.time.ZoneOffset;
  * Works so that a message is written to chat-log.
  * @author Remy Meier
  */
-public class Worker extends Thread implements Runnable {
+public class Worker extends Thread implements Runnable, TerminateThread {
 
     /**
      * Creates a new instance of Worker.
@@ -26,7 +26,7 @@ public class Worker extends Thread implements Runnable {
      */
     @Override
     public void run() {
-        while(true) {
+        while(running) {
             try {
                 chatLogger.writeSynchronizedChatLogMessage(
                         LocalDateTime.now().toInstant(ZoneOffset.UTC).toString() + " " + getName());
@@ -36,5 +36,13 @@ public class Worker extends Thread implements Runnable {
         }
     }
 
+    /**
+     * Terminates this thread.
+     */
+    public void terminate() {
+        running = false;
+    }
+
+    private volatile boolean running = true;
     private final ChatLogger chatLogger;
 }
