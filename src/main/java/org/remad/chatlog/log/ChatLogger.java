@@ -104,7 +104,7 @@ public class ChatLogger implements AutoCloseable {
     public synchronized void writeSynchronizedChatLogMessage(String message) throws IllegalAccessException {
         if (fileOutputStream == null || logWriter == null) {
             // Illegal accessed when file stream is null or logWriter is null.
-            throw new IllegalAccessException("Init the chatlogger instance first.");
+            throw new IllegalAccessException("Init the ChatLogger instance first.");
         }
         logWriter.println(message);
     }
@@ -117,7 +117,7 @@ public class ChatLogger implements AutoCloseable {
     public boolean checkError() throws IllegalAccessException {
         if (fileOutputStream == null || logWriter == null) {
             // Illegal accessed when file strem is null or logWriter is null.
-            throw new IllegalAccessException("Init the chatlogger instance first.");
+            throw new IllegalAccessException("Init the ChatLogger instance first.");
         }
         return logWriter.checkError();
     }

@@ -4,7 +4,6 @@ import org.remad.chatlog.log.ChatLogger;
 
 /**
  * Starts several threads and logs the chat without dead-lock.
- *
  * @author Remy Meier
  */
 public class MainThreadsLog {
